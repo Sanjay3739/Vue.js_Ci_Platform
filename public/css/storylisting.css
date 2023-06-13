@@ -1,0 +1,129 @@
+
+.storytopimage {
+    position: relative;
+    height: 340px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+
+}
+
+.image__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+
+.image__overlay>* {
+    transform: matrix(100%);
+
+}
+.image__overlay:hover {
+    opacity: 1;
+}
+#fonts{
+    font-size: small !important;
+    background-color: rgb(246, 249, 252);
+
+}
+
+
+.cardimage {
+    position: relative;
+    width: 100%;
+
+}
+
+.card-img {
+    display: block;
+    width: 100%;
+    width:100%;
+    height:200px;
+
+}
+
+.cardimage__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+    z-index: 2;
+}
+
+.cardimage__overlay>* {
+    transform: translateY(50%);
+
+}
+
+.cardimage__overlay:hover {
+    opacity: 1;
+
+
+}
+
+.cardtheme {
+    position: relative;
+    border-radius: 23px;
+    max-width: fit-content;
+    padding-bottom: 0.5rem;
+    background-color: white;
+    z-index: 1;
+}
+
+.storytitle{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #3b3b3b;
+}
+.story-description {
+    color: #757575;
+    display: -webkit-box;
+    /* max-width: 250px; */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.cardthemes{
+    margin-top: -12px;
+    align-items: center !important;
+}
+/* .btn-outline-secondary {
+    color: #ffffff;
+    border: 2px solid white;
+} */
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: var(--bs-yellow) !important;
+    border-color: var(--bs-yellow) !important;
+}
+.page-link {
+    color: var(--bs-yellow) !important;
+}
+.pagination .page-link:hover {
+    background-color: var(--bs-yellow) !important;
+    border-color: var(--bs-yellow) !important;
+    color: white !important;
+}
