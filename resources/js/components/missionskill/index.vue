@@ -64,8 +64,7 @@
                                 <tr v-for="missionskill in missionskills" :key="missionskill.skill_id">
                                     <td>{{ missionskill.skill_id }}</td>
                                     <td>{{ missionskill.skill_name }}</td>
-                                    <td :class="getStatusLabel(missionskill.status)">{{ getStatusLabel(missionskill.status
-                                    ) }}</td>
+                                    <td :class="getStatusLabel(missionskill.status)">{{ getStatusLabel(missionskill.status ) }}</td>
                                     <td
                                         style="display: flex; flex-direction: row; justify-content: space-evenly;">
                                         <router-link :to="`/missionskill/${missionskill.skill_id}`" class=""><svg

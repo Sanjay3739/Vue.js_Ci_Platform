@@ -20,6 +20,9 @@ import missionthemeindex from './components/missiontheme/index.vue';
 import missionthemecreate from './components/missiontheme/create.vue';
 import missionthemeshow from './components/missiontheme/show.vue';
 import missionthemeedit from './components/missiontheme/edit.vue';
+//missionApplication
+import missionapplicationindex from './components/missionapplication/index.vue';
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -27,9 +30,11 @@ const router = createRouter({
         //sidebar path
         { path: '/sidebar', component: sidebar },
 
-        // cms page path
+
         { path: '/', redirect: '/sidebar' }, // Redirect root path to '/cmspage'
-        { path: '/cmspage', component: index },
+
+        // cms page path
+         { path: '/cmspage', component: index },
         { path: '/cmspages/create', component: create },
         { path: '/cmspages/:cms_page_id', component: show },
         { path: '/cmspages/:cms_page_id/edit', component: edit },
@@ -46,6 +51,8 @@ const router = createRouter({
         { path: '/missiontheme/:mission_theme_id', component: missionthemeshow },
         { path: '/missiontheme/:mission_theme_id/edit', component: missionthemeedit },
 
+        // missionapplication page path
+        { path: '/missionapplication', component: missionapplicationindex },
     ]
 });
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\MissionskillController;
 use App\Http\Controllers\MissionthemeController;
+use App\Http\Controllers\MissionapplicationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,4 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('cmspages', CmsController::class);
 Route::resource('missionskill', MissionskillController::class);
 Route::resource('missiontheme', MissionthemeController::class);
+Route::resource('missionapplication', MissionapplicationController::class);
+// Route::put('/missionapplication/{id}/approve', 'MissionapplicationController@approve');
+// Route::put('/missionapplication/{id}/decline', 'MissionapplicationController@decline');
+Route::put('/missionapplication/{id}/approve', [MissionapplicationController::class, 'approve']);
+Route::put('/missionapplication/{id}/decline', [MissionapplicationController::class, 'decline']);
+
 

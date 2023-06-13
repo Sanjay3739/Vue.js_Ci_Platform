@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper"    >
+    <div class="wrapper">
         <div class="section">
             <div class="top_navbar">
                 <div class="hamburger" @click="toggleBodyClass">
@@ -19,10 +19,10 @@
             </div>
             <ul>
                 <li>
-                <router-link :to="`/user`"  class="active">
+                    <router-link :to="`/user`" class="active">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span class="item">User</span>
-                </router-link>
+                    </router-link>
                 </li>
                 <li>
                     <router-link :to="`/cmspage`">
@@ -80,14 +80,13 @@ export default {
     name: "App",
     components: { Sidebar },
     methods: {
-    toggleBodyClass() {
-      document.querySelector("body").classList.toggle("active");
+        toggleBodyClass() {
+            document.querySelector("body").classList.toggle("active");
+        }
     }
-  }
 }
 </script>
 <style>
-
 @import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
 
 * {
@@ -101,9 +100,12 @@ export default {
 
 body {
     background: #f5f6fa;
-}  ol, ul {
-   padding-left: 0rem !important;
- }
+}
+
+ol,
+ul {
+    padding-left: 0rem !important;
+}
 
 .wrapper .sidebar {
     background: rgb(5, 68, 104);
@@ -127,6 +129,17 @@ body {
     height: 100px;
     border-radius: 50%;
     margin: 0 auto;
+}
+
+.profile>img {
+
+    /* width: 100%; */
+    transition: all .1s ease-in-out;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.profile>img:hover {
+    transform: scale(1.5);
 }
 
 .wrapper .sidebar .profile h3 {
@@ -208,5 +221,4 @@ body.active .wrapper .section {
     margin-left: 0;
     width: 100%;
 }
-
 </style>

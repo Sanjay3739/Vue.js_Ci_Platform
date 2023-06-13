@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
             // MissionRatingSeeder::class,
             // MissionThemeSeeder::class,
             // MissionSkillSeeder::class,
-            MissionMediaSeeder::class,
+            // MissionMediaSeeder::class,
             // MissionSeeder::class,
             // UserSeeder::class,
             // MissionSeeder::class,
             // GoalMissionSeeder::class,
             // CommentSeeder::class,
-            // MissionApplicationSeeder::class,
+            MissionApplicationSeeder::class,
 
         ]);
     }
