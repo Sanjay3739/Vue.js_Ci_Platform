@@ -6,6 +6,13 @@ use App\Http\Controllers\CmsController;
 use App\Http\Controllers\MissionskillController;
 use App\Http\Controllers\MissionthemeController;
 use App\Http\Controllers\MissionapplicationController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\CityController;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,9 +31,15 @@ Route::resource('cmspages', CmsController::class);
 Route::resource('missionskill', MissionskillController::class);
 Route::resource('missiontheme', MissionthemeController::class);
 Route::resource('missionapplication', MissionapplicationController::class);
-// Route::put('/missionapplication/{id}/approve', 'MissionapplicationController@approve');
-// Route::put('/missionapplication/{id}/decline', 'MissionapplicationController@decline');
 Route::put('/missionapplication/{id}/approve', [MissionapplicationController::class, 'approve']);
 Route::put('/missionapplication/{id}/decline', [MissionapplicationController::class, 'decline']);
+Route::resource('story', StoryController::class);
+Route::put('/story/{id}/approve', [StoryController::class, 'approve']);
+Route::put('/story/{id}/decline', [StoryController::class, 'decline']);
+Route::resource('user', UserController::class);
+Route::get('countries', function () {
+    return \App\Models\Country::get(['name', 'country_id']);
+});
 
 
+// Route::resource('city', CityController::class);

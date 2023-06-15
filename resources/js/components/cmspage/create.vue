@@ -1,8 +1,8 @@
 <template>
-    <div class="container-fluid px-4">
+    <div class="container px-4">
         <h1 class="mt-4">CMS Page</h1>
         <marquee class="breadcrumb p-3   w-25 " id="marquee">
-            CMS-Index
+            CMS-Create
             <svg width="24" height="24" class="ms-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
                 clip-rule="evenodd">
                 <path

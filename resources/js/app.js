@@ -22,6 +22,14 @@ import missionthemeshow from './components/missiontheme/show.vue';
 import missionthemeedit from './components/missiontheme/edit.vue';
 //missionApplication
 import missionapplicationindex from './components/missionapplication/index.vue';
+//story
+import story from './components/story/index.vue';
+//user
+import userindex from './components/user/index.vue';
+import usercreate from './components/user/create.vue';
+import usershow from './components/user/show.vue';
+// import useredit from './components/user/edit.vue';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -31,10 +39,10 @@ const router = createRouter({
         { path: '/sidebar', component: sidebar },
 
 
-        { path: '/', redirect: '/sidebar' }, // Redirect root path to '/cmspage'
+        { path: '/', redirect: '/user' }, // Redirect root path to '/cmspage'
 
         // cms page path
-         { path: '/cmspage', component: index },
+        { path: '/cmspage', component: index },
         { path: '/cmspages/create', component: create },
         { path: '/cmspages/:cms_page_id', component: show },
         { path: '/cmspages/:cms_page_id/edit', component: edit },
@@ -53,6 +61,15 @@ const router = createRouter({
 
         // missionapplication page path
         { path: '/missionapplication', component: missionapplicationindex },
+
+        // Story page path
+        { path: '/story', component: story },
+
+        // User page path
+        { path: '/user', component: userindex },
+        { path: '/user/create', component: usercreate },
+        { path: '/user/:user_id', component: usershow },
+        // { path: '/user/:user_id/edit', component: useredit },
     ]
 });
 

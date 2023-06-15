@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // CountrySeeder::class,
-            // CitySeeder::class,
+            CitySeeder::class,
             // SkillSeeder::class,
             // StoryInviteSeeder::class,
             // StorySeeder::class,
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             // MissionSeeder::class,
             // GoalMissionSeeder::class,
             // CommentSeeder::class,
-            MissionApplicationSeeder::class,
+            // MissionApplicationSeeder::class,
 
         ]);
     }

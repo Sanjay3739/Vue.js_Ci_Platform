@@ -58,7 +58,7 @@
                                     <td>{{ missionapplication.applied_at }}</td>
                                     <td>{{ missionapplication.approval_status }}</td>
                                     <!-- <td :class="getStatusLabel(missionapplication.approval_status)">{{getStatusLabel(missionapplication.approval_status) }}</td> -->
-                               <!-- <td :class="getStatusLabel(missionskill.status)">{{ getStatusLabel(missionskill.status ) }}</td> -->
+                                    <!-- <td :class="getStatusLabel(missionskill.status)">{{ getStatusLabel(missionskill.status ) }}</td> -->
                                     <td class="fs-20">
                                         <a @click="approveApplication(missionapplication.mission_application_id)">
                                             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round"
@@ -80,6 +80,9 @@
                                     </td>
                                 </tr>
                             </tbody>
+                            <div class="card-footer">
+                                <pagination :total="totalItems" :per-page="perPage" v-model="currentPage" />
+                            </div>
                         </table>
                     </div>
                 </div>
@@ -91,6 +94,7 @@
 // import Pagination from '@/Components/Pagination.vue'
 import axios from 'axios';
 import Sidebar from '../sidebar.vue';
+// import Pagination from "./Pagination.vue";
 
 export default {
     data() {
@@ -99,6 +103,9 @@ export default {
 
             missionapplications: [],
             searchQuery: '',
+            perPage: 10,
+            currentPage: 1,
+            totalItems: 0,
         };
     },
     async created() {
@@ -111,20 +118,23 @@ export default {
             console.error(error);
         }
     },
-      methods: {
-        approveApplication(applicationId) {
+    methods: {
+        async approveApplication(applicationId) {
             axios.put(`/api/missionapplication/${applicationId}/approve`)
                 .then(response => {
                     // Handle success, e.g., show a success message or update the application status
+                    window.location.reload();
+
                 })
                 .catch(error => {
                     console.error(error.response.data);
                 });
         },
-        declineApplication(applicationId) {
+        async declineApplication(applicationId) {
             axios.put(`/api/missionapplication/${applicationId}/decline`)
                 .then(response => {
                     // Handle success, e.g., show a success message or update the application status
+                    window.location.reload();
                 })
                 .catch(error => {
                     console.error(error.response.data);
@@ -154,9 +164,17 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
+
 tr {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+tr>td{
+    padding: 10px !important;
+}
+tr>th{
+    padding-left: 20px;
+
 }
 
 #tf {

@@ -15,7 +15,7 @@
                             <td>
                                 <div class="d-flex">
                                     <h5>Title:</h5>
-                                    <h5 class="card-title ms-2  text-info"> {{ missiontheme.title }}</h5>
+                                    <h5 class="card-title ms-2  text-info"> {{ missiontheme.title ?? 'Not Availabale😒😒😒' }}</h5>
                                 </div>
                             </td>
                         </tr>
@@ -24,7 +24,7 @@
                                 <div class="d-flex">
                                     <h5>Status:</h5>
                                     <h5 class="card-title ms-2"  :class="getStatusLabel(missiontheme.status)">{{ getStatusLabel(missiontheme.status)
-                                    }}</h5>
+                                 ??   'Not Availabale😒😒😒' }}</h5>
                                 </div>
                             </td>
                         </tr>

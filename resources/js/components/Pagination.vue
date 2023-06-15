@@ -1,65 +1,74 @@
 <template>
-
-    <div v-if="links.length > 3">
-
-        <div class="flex flex-wrap mt-8">
-
-            <template v-for="(link, key) in links" :key="key">
-
-                <div
-
-                    v-if="link.url === null"
-
-                    class="mr-1 mb-1 px-4 py-3 text-sm leading-4 text-gray-400 border rounded"
-
-                    v-html="link.label"
-
-                />
-
-
-                <Link
-
-                    v-else
-
-                    class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-white focus:border-primary focus:text-primary"
-
-                    :class="{ 'bg-blue-700 text-white': link.active }"
-
-                    :href="link.url"
-
-                    v-html="link.label"
-
-                />
-
-            </template>
-
-        </div>
-
+    <div>
+      <nav>
+        <ul class="pagination">
+          <li v-if="pagination.prev_page_url" class="page-item">
+            <a class="page-link" @click="changePage(pagination.prev_page)" href="#">Previous</a>
+          </li>
+          <li v-for="page in pages" :key="page" class="page-item" :class="{ active: page === pagination.current_page }">
+            <a class="page-link" @click="changePage(page)" href="#">{{ page }}</a>
+          </li>
+          <li v-if="pagination.next_page_url" class="page-item">
+            <a class="page-link" @click="changePage(pagination.next_page)" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
     </div>
+  </template>
 
-</template>
-
-
-<script>
-
-import { defineComponent } from "vue";
-
-// import { Link } from "@inertiajs/inertia-vue3";
-
-export default defineComponent({
-
-    components: {
-
-        Link,
-
-    },
-
+  <script>
+  export default {
     props: {
-
-        links: Array,
-
+      pagination: {
+        type: Object,
+        required: true
+      }
     },
+    computed: {
+      pages() {
+        if (!this.pagination || !this.pagination.last_page) {
+          return [];
+        }
 
-});
+        const totalPages = this.pagination.last_page;
+        const currentPage = this.pagination.current_page;
+        const delta = 2;
+        const range = [];
+        const rangeWithDots = [];
+        let l;
 
-</script>
+        range.push(1);
+
+        if (totalPages <= 1) {
+          return range;
+        }
+
+        for (let i = currentPage - delta; i <= currentPage + delta; i++) {
+          if (i < totalPages && i > 1) {
+            range.push(i);
+          }
+        }
+        range.push(totalPages);
+
+        for (let i of range) {
+          if (l) {
+            if (i - l === 2) {
+              rangeWithDots.push(l + 1);
+            } else if (i - l !== 1) {
+              rangeWithDots.push("...");
+            }
+          }
+          rangeWithDots.push(i);
+          l = i;
+        }
+
+        return rangeWithDots;
+      }
+    },
+    methods: {
+      changePage(page) {
+        this.$emit("page-change", page);
+      }
+    }
+  };
+  </script>
