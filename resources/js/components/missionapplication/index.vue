@@ -1,8 +1,12 @@
 <template>
     <div class="container">
+
         <h3 class=" mt-4">Mission Application </h3>
+
+
         <div class="row">
-            <div class="col-md-12">
+
+            <div class="col-md-12 d-flex ">
                 <marquee class="breadcrumb mb-4 p-3 w-25 " id="marquee">
                     Mission-Application
                     <svg width="24" height="24" class="ms-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
@@ -11,6 +15,19 @@
                             d="M9 23h-5.991c-.553 0-1.001-.448-1.001-1s.448-1 1.001-1h2v-1h-2c-.553 0-1.001-.448-1.001-1s.448-1 1.001-1h2v-1h-2c-.553 0-1.001-.448-1.001-1s.448-1 1.001-1h18.008c.552 0 1 .448 1 1s-.448 1-1 1h-2.001v1h2.001c.552 0 1 .448 1 1s-.448 1-1 1h-2.001v1h2.001c.552 0 1 .448 1 1s-.448 1-1 1h-6.003v-6h-6.014v6zm13.172-9h-20.302l10.124-8.971 10.178 8.971zm-10.169-13s9.046 7.911 11.672 10.244c.413.367.45.999.083 1.412-.367.413-.996.445-1.412.083-2.421-2.105-10.343-9.063-10.343-9.063s-7.899 6.893-10.327 9.051c-.413.367-1.046.329-1.413-.083-.367-.413-.329-1.045.083-1.412 2.626-2.333 11.657-10.232 11.657-10.232zm.01 7c1.104 0 2 .896 2 2s-.896 2-2 2c-1.105 0-2.001-.896-2.001-2s.896-2 2.001-2zm7.003-5h2.984v5.128l-2.984-2.59v-2.538z" />
                     </svg>
                 </marquee>
+                <div class="msg">
+                    <transition name="slide-fade">
+                        <div v-if="successMessage" class="alert alert-success">
+                            {{ successMessage }}
+                        </div>
+                    </transition>
+
+                    <transition name="slide-fade">
+                        <div v-if="errorMessage" class="alert alert-danger">
+                            {{ errorMessage }}
+                        </div>
+                    </transition>
+                </div>
             </div>
             <div class="col-md-12">
                 <div class="card">
@@ -106,7 +123,13 @@ export default {
             perPage: 10,
             currentPage: 1,
             totalItems: 0,
+            successMessage: '',
+            errorMessage: '',
+
+
         };
+
+
     },
     async created() {
         try {
@@ -120,35 +143,70 @@ export default {
     },
     methods: {
         async approveApplication(applicationId) {
-            axios.put(`/api/missionapplication/${applicationId}/approve`)
+            axios
+                .put(`/api/missionapplication/${applicationId}/approve`)
                 .then(response => {
-                    // Handle success, e.g., show a success message or update the application status
+                    // Set success message
+                    this.successMessage = response.data.message;
+                    this.errorMessage = ''; // Clear error message if any
                     window.location.reload();
-
                 })
                 .catch(error => {
+                    // Set error message
+                    this.errorMessage = error.response.data.message;
+                    this.successMessage = ''; // Clear success message if any
                     console.error(error.response.data);
                 });
         },
         async declineApplication(applicationId) {
-            axios.put(`/api/missionapplication/${applicationId}/decline`)
+            axios
+                .put(`/api/missionapplication/${applicationId}/decline`)
                 .then(response => {
-                    // Handle success, e.g., show a success message or update the application status
+                    // Set success message
+                    this.successMessage = response.data.message;
+                    this.errorMessage = ''; // Clear error message if any
                     window.location.reload();
                 })
                 .catch(error => {
+                    // Set error message
+                    this.errorMessage = error.response.data.message;
+                    this.successMessage = ''; // Clear success message if any
                     console.error(error.response.data);
                 });
         },
-        // getStatusLabel(status) {
-        //     return status === 1 ? "APPROVE" : "DECLINE";
-        // },
+
     },
 
-    components: { Sidebar }
-}
+};
+
 </script>
 <style scoped>
+.slide-fade-enter-active {
+    transition: all 0.5s;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.5s;
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.d-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+}
+.alert-success{
+    background-color: rgb(117, 242, 117);
+    border-color: rgb(2, 36, 2);
+    color: rgb(10, 49, 10);
+}
+
 .breadcrumb {
     display: flex;
     justify-content: space-between;
@@ -160,6 +218,8 @@ export default {
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
 }
 
+
+
 .card {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
@@ -169,10 +229,12 @@ tr {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-tr>td{
+
+tr>td {
     padding: 10px !important;
 }
-tr>th{
+
+tr>th {
     padding-left: 20px;
 
 }

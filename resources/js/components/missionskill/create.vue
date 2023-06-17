@@ -1,15 +1,23 @@
-    <template>
+<template>
     <div class="container">
         <h1 class="mt-4">Mission Skill</h1>
-        <marquee class="breadcrumb mb-4 p-3 w-25 "
-            style=" background: linear-gradient(to right, #069ce6, #d00288, #f79809);box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);">
-            Skill-Create
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" class="ms-5" height="24" viewBox="0 0 24 24">
-                <path
-                    d="M9 19h-4v-2h4v2zm2.946-4.036l3.107 3.105-4.112.931 1.005-4.036zm12.054-5.839l-7.898 7.996-3.202-3.202 7.898-7.995 3.202 3.201zm-6 8.92v3.955h-16v-20h7.362c4.156 0 2.638 6 2.638 6s2.313-.635 4.067-.133l1.952-1.976c-2.214-2.807-5.762-5.891-7.83-5.891h-10.189v24h20v-7.98l-2 2.025z" />
-            </svg>
+        <div class="flex">
+            <marquee class="breadcrumb mb-4 p-3 w-25 "
+                style=" background: linear-gradient(to right, #069ce6, #d00288, #f79809);box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);">
+                Skill-Create
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" class="ms-5" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M9 19h-4v-2h4v2zm2.946-4.036l3.107 3.105-4.112.931 1.005-4.036zm12.054-5.839l-7.898 7.996-3.202-3.202 7.898-7.995 3.202 3.201zm-6 8.92v3.955h-16v-20h7.362c4.156 0 2.638 6 2.638 6s2.313-.635 4.067-.133l1.952-1.976c-2.214-2.807-5.762-5.891-7.83-5.891h-10.189v24h20v-7.98l-2 2.025z" />
+                </svg>
 
-        </marquee>
+            </marquee>
+            <div v-for="(errors, field) in validationErrors" :key="field">
+                <div v-for="error in errors" :key="error" class="alert alert-danger">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+
         <div class="card mb-4" style=" box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;">
             <div class="card-header" style="display:flex;">
                 <span class="m-2" style="font-weight:600;">Enter: </span>
@@ -23,7 +31,9 @@
 
                     <label for="skill_name">Skill Name</label>
                     <input type="text" v-model="missionskill.skill_name" class='form-control' name='skill_name'>
-
+                    <div v-if="validationErrors.skill_name" class="text-danger">
+                        {{ validationErrors.skill_name[0] }}
+                    </div>
 
                     <div class="py-4 d-flex">
                         <label for="status">Status*</label>
@@ -70,19 +80,10 @@ export default {
                 skill_name: '',
                 status: '1',
             },
-            errors: {},
             errorMessage: '',
-            successMessage: null,
+            validationErrors: {},
+
         }
-    },
-
-    async created() {
-
-        const response = await axios.get(`/api/missionskill/${this.$route.params.skill_id}`);
-
-
-        this.missionskill = response.data;
-
     },
     methods: {
         async submitForm() {
@@ -94,7 +95,16 @@ export default {
                 this.$router.push('/missionskill');
 
             } catch (error) {
-                console.error(error);
+                if (error.response && error.response.status === 422) {
+                    if (error.response.data && error.response.data.errors) {
+                        this.validationErrors = error.response.data.errors;
+                    } else {
+                        this.errorMessage = 'Validation failed. Please check the form.';
+                    }
+                } else {
+                    this.errorMessage = 'An error occurred while saving the CMS page.';
+                    console.error(error);
+                }
             }
         }
     }
@@ -111,5 +121,18 @@ export default {
     border-radius: 180px;
     background: linear-gradient(to left, #069ce6, #d00288, #f79809);
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.alert-succsess {
+   
+    border-color: rgb(2, 36, 2);
+    color: rgb(10, 49, 10);
 }
 </style>

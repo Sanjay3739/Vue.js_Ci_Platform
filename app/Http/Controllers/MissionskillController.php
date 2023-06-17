@@ -17,8 +17,8 @@ class MissionskillController extends Controller
     {
         $request->validate([
 
-            'skill_name',
-            'status',
+            'skill_name'  => 'required',
+            'status'  => 'required',
         ]);
 
         return Skill::create($request->all());

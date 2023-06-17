@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MissionApplication;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class MissionapplicationController extends Controller
 {
@@ -11,8 +12,8 @@ class MissionapplicationController extends Controller
     {
         $applications = MissionApplication::join('users', 'users.user_id', '=', 'mission_applications.user_id')
             ->join('missions', 'missions.mission_id', '=', 'mission_applications.mission_id')
-            // ->where('mission_applications.approval_status', 'PENDING')
             ->get();
+
         return response()->json($applications);
     }
 
@@ -22,8 +23,8 @@ class MissionapplicationController extends Controller
         $application->approval_status = 'APPROVE';
         $application->save();
 
-        // Optionally, you can return a response or success message
-        return response()->json(['message' => 'Application approved successfully']);
+        // Return a response with the approval status
+        return response()->json(['message' => 'Application approved successfully', 'status' => $application->approval_status]);
     }
 
     public function decline($id)
@@ -32,10 +33,7 @@ class MissionapplicationController extends Controller
         $application->approval_status = 'DECLINE';
         $application->save();
 
-        // Optionally, you can return a response or success message
-        return response()->json(['message' => 'Application declined successfully']);
+        // Return a response with the approval status
+        return response()->json(['message' => 'Application declined successfully', 'status' => $application->approval_status]);
     }
-
-
-
 }

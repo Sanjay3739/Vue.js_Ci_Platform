@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\CmsPage;
+use Illuminate\Validation\ValidationException;
 
 class CmsController extends Controller
 {
@@ -13,17 +15,19 @@ class CmsController extends Controller
     {
         return CmsPage::all();
     }
+
     public function store(Request $request)
     {
-        $request->validate([
-
+        $validatedData = $request->validate([
             'title' => 'required',
             'text' => 'required',
             'slug' => 'required',
             'status' => 'required',
         ]);
 
-        return CmsPage::create($request->all());
+        $cmsPage = CmsPage::create($validatedData);
+
+        return response()->json($cmsPage, 201);
     }
 
     public function show($id)
@@ -38,15 +42,17 @@ class CmsController extends Controller
 
     public function update(Request $request, CmsPage $cmspage)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required',
             'text' => 'required',
-            'slug' => 'required',
+            'slug' =>'required',
+
             'status' => 'required',
         ]);
 
-        $cmspage->update($request->all());
-        return $cmspage;
+        $cmspage->update($validatedData);
+
+        return response()->json($cmspage);
     }
 
     public function destroy($id)

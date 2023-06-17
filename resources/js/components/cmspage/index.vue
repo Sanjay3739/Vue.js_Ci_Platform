@@ -141,6 +141,7 @@ export default {
     color: rgb(58, 195, 58);
 }
 
+
 .Inactive {
     color: red;
 }

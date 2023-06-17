@@ -17,8 +17,8 @@ class MissionthemeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title',
-            'status',
+            'title' => 'required',
+            'status'  => 'required',
         ]);
 
         return MissionTheme::create($request->all());

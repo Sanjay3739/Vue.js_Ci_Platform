@@ -104,14 +104,18 @@ class UserController extends Controller
         User::findOrFail($id)->fill($validatedData)->save();
         return redirect()->route('user.index')->with('message', 'Your!.. Data Updated sucessfully 🙂👍');
     }
+
+
+
+
+
     public function destroy($id)
     {
-        /**
-         * Remove the specified resource from storage.
-         */
-        $user = new User;
-        $user->find($id)
-            ->delete();
-        return back()->with('message', 'User Account Deleted sucessfully 😒');
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return response()->json(['message' => 'CmsPage deleted successfully']);
+        }
+        return response()->json(['message' => 'CmsPage not found'], 404);
     }
 }

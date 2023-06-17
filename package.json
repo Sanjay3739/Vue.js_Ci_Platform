@@ -19,7 +19,9 @@
         "@ckeditor/ckeditor5-build-classic": "^38.0.1",
         "@ckeditor/ckeditor5-vue": "^5.1.0",
         "ckeditor": "^4.12.1",
+        "process": "^0.11.10",
         "vue-router": "^4.0.13",
-        "vuejs-laravel-table-pagination-crud": "^1.0.30"
+        "vuejs-laravel-table-pagination-crud": "^1.0.30",
+        "vuelidate": "^0.7.7"
     }
 }

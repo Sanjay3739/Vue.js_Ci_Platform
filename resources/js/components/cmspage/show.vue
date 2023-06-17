@@ -108,3 +108,5 @@ export default {
 .Inactive {
     color: red  !important;
 }</style>
+
+

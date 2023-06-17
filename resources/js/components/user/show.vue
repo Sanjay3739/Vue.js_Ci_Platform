@@ -121,15 +121,7 @@
 <script>
 import axios from 'axios';
 
-axios.get('/countries')
-    .then(response => {
-        // Handle the success response and assign the countries data to a Vue property
-        this.countries = response.data;
-    })
-    .catch(error => {
-        // Handle the error response
-        console.error(error);
-    });
+
 export default {
     data() {
         return {
@@ -139,6 +131,16 @@ export default {
         };
     },
     created() {
+        console.log('Component created');
+        console.log('user_id:', this.$route.params.user_id);
+        axios.get(`/api/user/${this.$route.params.user_id}`)
+            .then(response => {
+                console.log('API response:', response.data);
+                this.user = response.data;
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
     },
     methods: {

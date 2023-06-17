@@ -30,6 +30,11 @@
                     <div class="container"
                         style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px">
                         <form @submit.prevent="submitForm">
+                            <div v-for="(errors, field) in validationErrors" :key="field">
+                                <div v-for="error in errors" :key="error" class="alert alert-danger">
+                                    {{ error }}
+                                </div>
+                            </div>
                             <div class="form-row d-flex py-4" id="radioimg">
                                 <div class="form-check">
                                     <input class="form-check-input m-1" value="Images/volunteer1.png" v-model="user.avatar"
@@ -109,12 +114,18 @@
                                             First Name</label>
                                         <input type="text" v-model="user.first_name" name="first_name" class="form-control"
                                             id="">
+                                        <div v-if="validationErrors.first_name" class="text-danger">
+                                            {{ validationErrors.first_name[0] }}
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="last_name">
                                             Last Name</label>
                                         <input type="text" v-model="user.last_name" name="last_name" class="form-control"
                                             id="">
+                                        <div v-if="validationErrors.last_name" class="text-danger">
+                                            {{ validationErrors.last_name[0] }}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -125,12 +136,18 @@
                                         <label for="Email">
                                             Email</label>
                                         <input type="email" v-model="user.email" name="email" class="form-control" id="">
+                                        <div v-if="validationErrors.email" class="text-danger">
+                                            {{ validationErrors.email[0] }}
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="phone_number">
                                             Phone Number</label>
                                         <input type="tel" v-model="user.phone_number" name="phone_number"
                                             class="form-control" id="">
+                                        <div v-if="validationErrors.phone_number" class="text-danger">
+                                            {{ validationErrors.phone_number[0] }}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -142,6 +159,9 @@
                                             Employee ID</label>
                                         <input type="text" v-model="user.employee_id" name="employee_id"
                                             class="form-control " id="">
+                                        <div v-if="validationErrors.phone_number" class="text-danger">
+                                            {{ validationErrors.phone_number[0] }}
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="department">
@@ -155,6 +175,9 @@
                                             <option value="Deployment">Deployment</option>
                                             <option value="Manager">Manager</option>
                                         </select>
+                                        <div v-if="validationErrors.department" class="text-danger">
+                                            {{ validationErrors.department[0] }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -165,6 +188,9 @@
                                             About You</label>
                                         <textarea class="form-control" v-model="user.profile_text" id="profile_text"
                                             name="profile_text"></textarea>
+                                        <div v-if="validationErrors.profile_text" class="text-danger">
+                                            {{ validationErrors.profile_text[0] }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -180,11 +206,16 @@
                                                 {{ country.id }}
                                             </option>
                                         </select>
+                                        <div v-if="validationErrors.country_id" class="text-danger">
+                                            {{ validationErrors.country_id[0] }}
+                                        </div>
                                     </div>
+                                    
                                     <div class="col-md-5">
                                         <label for="city">city</label>
                                         <select class="form-control " v-model="user.city" name="city_id" id="city-dropdown">
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +279,7 @@ export default {
             },
             errors: {},
             errorMessage: '',
-            successMessage: null,
+            validationErrors: {},
         }
     },
 
@@ -279,7 +310,16 @@ export default {
                 this.$router.push('/user');
 
             } catch (error) {
-                console.error(error);
+                if (error.response && error.response.status === 422) {
+                    if (error.response.data && error.response.data.errors) {
+                        this.validationErrors = error.response.data.errors;
+                    } else {
+                        this.errorMessage = 'Validation failed. Please check the form.';
+                    }
+                } else {
+                    this.errorMessage = 'An error occurred while saving the user page.';
+                    console.error(error);
+                }
             }
         },
 

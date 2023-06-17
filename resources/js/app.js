@@ -30,6 +30,11 @@ import usercreate from './components/user/create.vue';
 import usershow from './components/user/show.vue';
 // import useredit from './components/user/edit.vue';
 
+//banner
+import bannerindex from './components/banner/index.vue';
+import bannercreate from './components/banner/create.vue';
+import bannershow from './components/banner/show.vue';
+import banneredit from './components/banner/edit.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -70,6 +75,16 @@ const router = createRouter({
         { path: '/user/create', component: usercreate },
         { path: '/user/:user_id', component: usershow },
         // { path: '/user/:user_id/edit', component: useredit },
+
+        // Banner page path
+        { path: '/banner', component: bannerindex },
+        { path: '/banner/create', component: bannercreate },
+        { path: '/banner/:banner_id', component: bannershow },
+        { path: '/banner/:banner_id/edit', component: banneredit },
+
+
+
+
     ]
 });
 

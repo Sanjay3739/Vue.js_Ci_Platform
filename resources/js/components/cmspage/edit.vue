@@ -15,58 +15,31 @@
             </div>
             <div class="card-body">
                 <div class="container">
-                    <!-- <h2 v-if="isNewpage">Add cmspage</h2> -->
-
                     <form @submit.prevent="submitForm">
-
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
                                 <label for="Title">Title*</label>
-                                <input type="text" v-model="cmspage.title" name="title" class="form-control " id="" required>
-                                <div v-if="errors.title" class="text-danger">{{ errors.title[0] }}</div>
-                                <!-- @error('title')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror -->
+                                <input type="text" v-model="cmspage.title"  class="form-control" id="" required>
+                                <div v-if="errors && errors.title" class="text-danger">{{ errors.title[0] }}</div>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="inputAddress" class="form-label ">Description*</label>
-                                <textarea name="text" v-model="cmspage.text" class=" form-control " id="editor1" required></textarea>
-                                <!-- @error('text')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror -->
+                                <textarea name="text" v-model="cmspage.text" class=" form-control " id="editor1"
+                                    required></textarea>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="slug">Slug*</label>
                                 <input type="text" name="slug" v-model="cmspage.slug" class="form-control" id="" required>
-                                <!-- class="form-control @error('slug') is-invalid @enderror" -->
-                                <!-- @error('slug')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror -->
                             </div>
                             <div class="col-md-12 mb-3 w-25">
-                                <label  for="status" class="">Status*</label>
+                                <label for="status" class="">Status*</label>
                                 <select name="status" id="status" v-model="cmspage.status" class="form-control" required>
-                                    <option  value="0">Inactive</option>
+                                    <option value="0">Inactive</option>
                                     <option value="1">Active</option>
                                 </select>
-                                <!-- @error('status')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror -->
                             </div>
                             <div class="col-md-12 py-4 mr-5">
-
-                                <!-- <button v-if="isNewpage"
-                                    class="btn apply-btn px-3 rounded-pill float-end btn-outline-warning"
-                                    type="submit">Save</button> -->
-                                <button  class="btn apply-btn px-3 rounded-pill float-end btn-outline-warning"
+                                <button class="btn apply-btn px-3 rounded-pill float-end btn-outline-warning"
                                     type="submit">Save</button>
                             </div>
                         </div>
@@ -76,13 +49,9 @@
         </div>
     </div>
 </template>
-
-
 <script>
 
 import axios from 'axios';
-
-
 export default {
     data() {
         return {
@@ -92,69 +61,35 @@ export default {
                 slug: '',
                 status: '1',
             },
-            errors: {},
-            errorMessage:'',
-            successMessage:null,
+            errors: {}, // Initialize the errors object
+            errorMessage: '',
+            successMessage: null,
         }
     },
-
-    // computed: {
-    //     // isNewpage() {
-
-    //         return !this.$route.path.includes('edit');
-
-    //     // }
-    // },
     async created() {
-        // if (!this.isNewpage) {
-            const response = await axios.get(`/api/cmspages/${this.$route.params.cms_page_id}`);
-
-            // const response = await axios.get(`/api/cmspages/${this.$route.params.id}`);
-            this.cmspage = response.data;
-        // }
+        const response = await axios.get(`/api/cmspages/${this.$route.params.cms_page_id}`);
+        this.cmspage = response.data;
     },
     methods: {
         async submitForm() {
-
-            try {
-
-                // if (this.isNewpage) {
-                //     await axios.post('/api/cmspages', this.cmspage)
-                //         .then((response) => {
-                //             // Handle successful registration
-                //             this.successMessage = response.data.message;
-                //             console.log(response.data);
-                //             // Redirect or show success message as needed
-                //         })
-                //         .catch((error) => {
-                //             // Handle registration errors
-                //             if (error.response.status === 422) {
-                //                 this.errors = error.response.data.errors;
-                //             } else if (error.response.status === 500) {
-                //                 this.errorMessage = error.response.data.message;
-                //             } else {
-                //                 this.errorMessage = 'An error occurred. Please try again.';
-                //             }
-                //         })
-                // } else {
-                    console.log(this.cmspage);
-                    await axios.put(`/api/cmspages/${this.$route.params.cms_page_id}`, this.cmspage);
-
-                // }
-                this.$router.push('/cmspage');
-
-            } catch (error) {
+        try {
+            console.log(this.cmspage);
+            const response = await axios.put(`/api/cmspages/${this.$route.params.cms_page_id}`, this.cmspage);
+            this.$router.push('/cmspage');
+        } catch (error) {
+            if (error.response && error.response.status === 422) {
+                this.errors = error.response.data.errors;
+            } else {
                 console.error(error);
             }
         }
     }
+
+    }
 }
-
 </script>
-
 <style scoped>
 @import 'https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css';
-
 
 .error {
     color: red;

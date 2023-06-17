@@ -89,7 +89,7 @@
                                             <router-link :to="`/user/${user.user_id}/edit`" class=""><img
                                                     src="Images/edit.png" style="height: 22px; width: 22px;">
                                             </router-link>
-                                            <a @click="user(user.user_id)" id="delete">
+                                            <a @click="deleteuser(user.user_id)" id="delete">
                                                 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
                                                     fill-rule="evenodd" clip-rule="evenodd">
                                                     <path
@@ -138,21 +138,19 @@ export default {
         }
     },
     methods: {
-        async user(id) {
+
+        getStatusLabel(status) {
+            return status == 1 ? "Active" : "Inactive";
+        },
+        async deleteuser(id) {
             try {
                 await axios.delete(`/api/user/${id}`);
-                this.users = this.users.filter(user => user.user_id !== id);
 
+                this.users = this.users.filter(page => page.user_id !== id);
             } catch (error) {
                 console.error(error);
             }
         },
-        getStatusLabel(status) {
-            return status == 1 ? "Active" : "Inactive";
-        },
-        search() {
-
-        }
     },
     components: { Sidebar }
 }
@@ -168,7 +166,8 @@ export default {
     color: #000000;
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
 }
-tr>td{
+
+tr>td {
 
     margin: 10px;
 }
@@ -177,6 +176,7 @@ tr {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
+
 .Active {
     color: rgb(58, 195, 58);
 }

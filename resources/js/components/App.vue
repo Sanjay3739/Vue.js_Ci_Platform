@@ -61,6 +61,12 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link :to="`/banner`">
+                        <span class="icon"><i class="fas fa-yin-yang"></i></span>
+                        <span class="item">Banner</span>
+                    </router-link>
+                </li>
+                <li>
                     <a href="#">
                         <span class="icon"><i class="fas fa-cog"></i></span>
                         <span class="item">Settings</span>
