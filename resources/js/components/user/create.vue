@@ -210,7 +210,7 @@
                                             {{ validationErrors.country_id[0] }}
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-md-5">
                                         <label for="city">city</label>
                                         <select class="form-control " v-model="user.city" name="city_id" id="city-dropdown">
@@ -327,19 +327,6 @@ export default {
 }
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <style scoped>

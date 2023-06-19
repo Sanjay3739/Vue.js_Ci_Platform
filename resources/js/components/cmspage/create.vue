@@ -86,7 +86,7 @@ export default {
             validationErrors: {},
         }
     },
-    
+
     methods: {
         async submitForm() {
             try {
@@ -158,33 +158,4 @@ tr {
 }
 
 
-.pagination .page-link:before,
-.pagination .page-link:after {
-    display: inline-block;
-    font-weight: bold;
-}
-
-.pagination .previous .page-link:before,
-.pagination .next .page-link:after {
-    display: none;
-}
-
-.pagination .page-link {
-    background-color: rgba(255, 255, 255, 0.779);
-    border-color: rgb(174, 169, 166);
-    margin: 8px;
-    color: rgb(218, 77, 7);
-}
-
-.pagination .page-link:hover {
-    background-color: #ff6701;
-    border-color: #ff4d00;
-    color: white;
-}
-
-.pagination .page-item.active .page-link {
-    background-color: #ff6701;
-    border-color: #ff6701;
-    color: white;
-}
 </style>
