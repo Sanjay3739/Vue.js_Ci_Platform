@@ -86,11 +86,7 @@ export default {
             validationErrors: {},
         }
     },
-    // async created() {
-
-    //     const response = await axios.get(`/api/cmspages/${this.$route.params.cms_page_id}`);
-    //     this.cmspage = response.data;
-    // },
+    
     methods: {
         async submitForm() {
             try {

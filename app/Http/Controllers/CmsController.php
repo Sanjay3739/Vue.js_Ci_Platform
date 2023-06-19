@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Models\CmsPage;
 use Illuminate\Validation\ValidationException;
 
 class CmsController extends Controller
 {
-
 
     public function index()
     {

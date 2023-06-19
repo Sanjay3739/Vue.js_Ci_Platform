@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // Import components
 import App from './components/App.vue';
+import login from './components/login.vue';
 //sidebar
 import sidebar from './components/sidebar.vue';
 // cms page
@@ -77,12 +78,15 @@ const router = createRouter({
         // { path: '/user/:user_id/edit', component: useredit },
 
         // Banner page path
-        { path: '/banner', component: bannerindex },
         { path: '/banner/create', component: bannercreate },
-        { path: '/banner/:banner_id', component: bannershow },
         { path: '/banner/:banner_id/edit', component: banneredit },
+        { path: '/banner/:banner_id', component: bannershow },
+        { path: '/banner', component: bannerindex },
 
-
+        //login page path
+        {
+            path: '/login', component: login
+        }
 
 
     ]

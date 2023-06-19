@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Banner;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -17,8 +18,8 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'text' => 'required|string',
-            'sort_order' => 'required|integer',
+            'text' => 'required',
+            'sort_order' => 'required',
             'image' => 'required',
         ]);
 
@@ -46,31 +47,34 @@ class BannerController extends Controller
         return response()->json(['banner' => $banner], 200);
     }
 
-
-
-    public function update(Request $request, $id)
+    public function update(Request $request, Banner $banner)
     {
-        $request->validate([
-            'text' => 'required|string',
-            'sort_order' => 'required|integer',
-            'image' => 'nullable|image',
-        ]);
+        // $image = $request->file('image');
+        // dd($image);
+        try {
+            $validatedData = $request->validate([
+                'text' => 'required',
+                'sort_order' => 'required',
+            ]);
+            if ($request->hasFile('image')) {
+                $request->validate([
+                    'image' => 'image',
+                ]);
 
-        $banner = Banner::findOrFail($id);
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $image->hashName();
-            $image->store('public/uploads');
-            $banner->image = $imageName;
+                $image = $request->file('image');
+                $imageName = $image->hashName();
+                $image->store('public/uploads');
+                $banner->image = $imageName;
+            }
+            $banner->update($validatedData);
+            return response()->json($banner);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
-
-        $banner->text = $request->input('text');
-        $banner->sort_order = $request->input('sort_order');
-        $banner->save();
-
-        return response()->json(['message' => 'Banner updated successfully'], 200);
     }
+
+
+
 
 
     public function destroy($id)
