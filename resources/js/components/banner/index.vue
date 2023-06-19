@@ -67,8 +67,12 @@
                                     <tbody>
 
                                         <tr v-for="banner in banners" :key="banner.banner_id">
-                                            <td  class=""> <div>{{ banner.text }}</div></td>
-                                            <td class=""> <div>{{ banner.sort_order }}</div></td>
+                                            <td class="">
+                                                <div>{{ banner.text }}</div>
+                                            </td>
+                                            <td class="">
+                                                <div>{{ banner.sort_order }}</div>
+                                            </td>
 
                                             <td
                                                 style="display: flex; flex-direction: row; padding: 10px; justify-content: space-between;">
@@ -157,7 +161,9 @@ td {
 }
 
 #marquee {
-    background: linear-gradient(to right, #069ce6, #d00288, #f79809);
+    border-radius: 10px !important;
+    background: linear-gradient(to left, #069ce6, #d00288, #f79809);
+    color: #000000;
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
 }
 
@@ -173,6 +179,4 @@ td {
     width: 50px;
     height: 50px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-}
-
-</style>
+}</style>

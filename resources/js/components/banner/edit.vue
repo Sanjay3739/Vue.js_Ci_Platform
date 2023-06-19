@@ -30,16 +30,23 @@
                             <label for="text">Title</label>
                             <textarea rows="5" v-model="banner.text" name="text" id="editor1"
                                 class="form-control"></textarea>
+                            <div v-if="validationErrors.text" class="text-danger">
+                                {{ validationErrors.text[0] }}
+                            </div>
                         </div>
                         <div class="col-lg-12  mt-3">
                             <div class="row">
                                 <div class="col-lg-3 col-md-12 ">
                                     <label for="Sort Order"> Sort Order</label>
                                     <input type="number" v-model="banner.sort_order" name="sort_order" class="form-control">
+                                    <div v-if="validationErrors.sort_order" class="text-danger">
+                                        {{ validationErrors.sort_order[0] }}
+                                    </div>
                                 </div>
                                 <div class="col-lg-3 col-md-12 ">
                                     <label for="Image"> Image:</label>
                                     <input type="file" ref="fileInput" @change="handleImageUpload">
+
                                 </div>
                             </div>
                         </div>
@@ -72,7 +79,11 @@ export default {
                 image: null, // Modify to initialize as null
                 sort_order: '',
 
+
             },
+            errors: {},
+            errorMessage: '',
+            validationErrors: {},
         };
     },
     // Use the mounted() lifecycle hook instead of created()
@@ -95,18 +106,22 @@ export default {
         async submitForm() {
             try {
                 const formData = new FormData();
-                formData.append('text',this.banner.text);
-                formData.append('sort_order',this.banner.sort_order);
-                formData.append('image',this.banner.image);
-                formData.append('_method','PUT');
+                formData.append('text', this.banner.text);
+                formData.append('sort_order', this.banner.sort_order);
+                formData.append('image', this.banner.image);
+                formData.append('_method', 'PUT');
                 const response = await axios.post(`/api/banner/${this.$route.params.banner_id}`, formData
                 );
                 this.$router.push('/banner');
             } catch (error) {
                 if (error.response && error.response.status === 422) {
-                    this.errors = error.response.data.errors;
-                    console.log(this.errors);
+                    if (error.response.data && error.response.data.errors) {
+                        this.validationErrors = error.response.data.errors;
+                    } else {
+                        this.errorMessage = 'Validation failed. Please check the form.';
+                    }
                 } else {
+                    this.errorMessage = 'An error occurred while saving the user page.';
                     console.error(error);
                 }
             }
@@ -146,6 +161,4 @@ tr {
     background: linear-gradient(to left, #069ce6, #d00288, #f79809);
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
 }
-
-
 </style>

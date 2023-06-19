@@ -53,7 +53,7 @@
                         </form>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-hover  ">
+                        <table class="table table-hover mw-100 w-100 table-bordered text-center ">
                             <thead class="thead-light">
                                 <tr>
                                     <th> Mission Title</th>
@@ -195,13 +195,14 @@ export default {
     transform: translateY(20px);
 }
 
-.d-flex{
+.d-flex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-weight: 600;
 }
-.alert-success{
+
+.alert-success {
     background-color: rgb(117, 242, 117);
     border-color: rgb(2, 36, 2);
     color: rgb(10, 49, 10);
@@ -230,14 +231,14 @@ tr {
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-tr>td {
+/* tr>td {
     padding: 10px !important;
-}
+} */
 
-tr>th {
+/* tr>th {
     padding-left: 20px;
 
-}
+} */
 
 #tf {
     border: none;
@@ -251,5 +252,4 @@ tr>th {
 #red {
     fill: red;
 }
-
 </style>

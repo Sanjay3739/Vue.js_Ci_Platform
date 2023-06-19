@@ -36,8 +36,8 @@ class MissionskillController extends Controller
     public function update(Request $request, Skill $missionskill)
     {
         $request->validate([
-            'skill_name',
-            'status',
+            'skill_name' => 'required',
+            'status' => 'required',
         ]);
 
         $missionskill->update($request->all());

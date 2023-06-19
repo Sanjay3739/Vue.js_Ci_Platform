@@ -44,7 +44,6 @@ class CmsController extends Controller
             'title' => 'required',
             'text' => 'required',
             'slug' =>'required',
-
             'status' => 'required',
         ]);
 

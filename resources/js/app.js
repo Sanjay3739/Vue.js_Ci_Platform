@@ -29,8 +29,7 @@ import story from './components/story/index.vue';
 import userindex from './components/user/index.vue';
 import usercreate from './components/user/create.vue';
 import usershow from './components/user/show.vue';
-// import useredit from './components/user/edit.vue';
-
+import useredit from './components/user/edit.vue';
 //banner
 import bannerindex from './components/banner/index.vue';
 import bannercreate from './components/banner/create.vue';
@@ -43,8 +42,6 @@ const router = createRouter({
 
         //sidebar path
         { path: '/sidebar', component: sidebar },
-
-
         { path: '/', redirect: '/user' }, // Redirect root path to '/cmspage'
 
         // cms page path
@@ -75,7 +72,7 @@ const router = createRouter({
         { path: '/user', component: userindex },
         { path: '/user/create', component: usercreate },
         { path: '/user/:user_id', component: usershow },
-        // { path: '/user/:user_id/edit', component: useredit },
+        { path: '/user/:user_id/edit', component: useredit },
 
         // Banner page path
         { path: '/banner/create', component: bannercreate },
@@ -84,9 +81,7 @@ const router = createRouter({
         { path: '/banner', component: bannerindex },
 
         //login page path
-        {
-            path: '/login', component: login
-        }
+        { path: '/login', component: login }
 
 
     ]

@@ -28,7 +28,8 @@
                                 </tr>
                                 <th>Mobile Number </th>
                                 <tr>
-                                    <td>{{ user.phone_number ?? 'Not Availabale😒😒😒' }}</td>
+                                    <td v-if="user.phone_number">{{ user.phone_number }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
                                 <th>Status </th>
                                 <tr>
@@ -40,11 +41,14 @@
                                 </tr>
                                 <th>Department</th>
                                 <tr>
-                                    <td>{{ user.department ?? 'Not Availabale😒😒😒' }}</td>
+                                    <td v-if="user.department">{{ user.department }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
+
                                 </tr>
                                 <th>Employee Id</th>
                                 <tr>
-                                    <td>{{ user.employee_id ?? 'Not Availabale😒😒😒' }} </td>
+                                    <td v-if="user.employee_id">{{ user.employee_id }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
 
                             </tbody>
@@ -68,28 +72,35 @@
                             <tbody>
                                 <th>Country Name:</th>
                                 <tr>
-                                    <td>{{ user.country.name ?? 'Not Availabale😒😒😒' }} </td>
+                                    <td v-if="user.country.name">{{ user.country.name }} </td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
                                 <th>City Name:</th>
                                 <tr>
-                                    <td>{{ user.city.name ?? 'Not Availabale😒😒😒' }} </td>
+                                    <td v-if="user.city && user.city.name">{{ user.city.name }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
+
                                 <th> Profile Text</th>
                                 <tr>
-                                    <td>{{ user.profile_text ?? 'Not Availabale😒😒😒' }}</td>
+                                    <td v-if="user.profile_text">{{ user.profile_text }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
 
                                 <th>Availability</th>
                                 <tr>
-                                    <td>{{ user.availability ?? 'Not Availabale😒😒😒' }}</td>
+                                    <td v-if="user.availability">{{ user.availability }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
                                 <th>Manager</th>
                                 <tr>
-                                    <td>{{ user.manager ?? 'Not Availabale😒😒😒' }} </td>
+                                    <td v-if="user.manager">{{ user.manager }} </td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
                                 <th>Linkdin Url</th>
                                 <tr>
-                                    <td>{{ user.linked_in_url ?? 'Not Availabale😒😒😒' }}</td>
+                                    <td v-if="user.linked_in_url">{{ user.linked_in_url }}</td>
+                                    <td v-else>Not Available 😒😒😒</td>
                                 </tr>
                             </tbody>
                         </table>

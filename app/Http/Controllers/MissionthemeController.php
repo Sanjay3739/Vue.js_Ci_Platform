@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MissionTheme;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class MissionthemeController extends Controller
 {
@@ -36,8 +37,8 @@ class MissionthemeController extends Controller
     public function update(Request $request, MissionTheme $missiontheme)
     {
         $request->validate([
-            'title',
-            'status',
+            'title'  => 'required',
+            'status'  => 'required',
         ]);
 
         $missiontheme->update($request->all());

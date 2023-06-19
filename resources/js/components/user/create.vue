@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="mt-4">User</h1>
-                <marquee class="breadcrumb mb-4 p-3 w-25 " id="marquee"
+                <marquee class="breadcrumb col-lg-6 mb-4 p-3 w-25 " id="marquee"
                     style=" background: linear-gradient(to right, #069ce6, #d00288, #f79809);box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);">
                     User-Create
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" class="ms-5" height="24" viewBox="0 0 24 24">
@@ -31,14 +31,14 @@
                         style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px">
                         <form @submit.prevent="submitForm">
                             <div v-for="(errors, field) in validationErrors" :key="field">
-                                <div v-for="error in errors" :key="error" class="alert alert-danger">
+                                <div v-for="error in errors" :key="error" class="alert alert-danger ">
                                     {{ error }}
                                 </div>
                             </div>
                             <div class="form-row d-flex py-4" id="radioimg">
                                 <div class="form-check">
                                     <input class="form-check-input m-1" value="Images/volunteer1.png" v-model="user.avatar"
-                                        type="radio" name="avatar" id="avatar1" checked>
+                                        type="radio" name="avatar" id="avatar1">
                                     <label class="form-check-label p-2 imges " for="avatar1">
                                         <img class="rounded-circle img-fluid" src="/Images/volunteer1.png" alt="Alt Images">
                                     </label>
@@ -196,14 +196,14 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="row">
-                                    <div class="form-group">
+                                    <div class="form-group col-lg-6">
                                         <label for="country_id">Country:</label>
                                         <select v-model="user.country_id" id="country_id" name="country_id"
                                             class="form-control">
                                             <option value="">Select Country</option>
                                             <option v-for="country in countries" :value="country.country_id"
                                                 :key="country.country_id">
-                                                {{ country.id }}
+                                                {{ country.name }}
                                             </option>
                                         </select>
                                         <div v-if="validationErrors.country_id" class="text-danger">
@@ -211,7 +211,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <label for="city">city</label>
                                         <select class="form-control " v-model="user.city" name="city_id" id="city-dropdown">
                                         </select>
@@ -284,17 +284,19 @@ export default {
     },
 
 
-    mounted() {
+
+    async created() {
+
         this.fetchCountries();
 
     },
 
     methods: {
         fetchCountries() {
-            axios.get('/countries')
+            axios.get('/api/countries')
                 .then(response => {
-                    // Assign the fetched countries data to the countries property
-                    this.countries = response.data;
+                    this.countries = response.data.countries;
+                    console.log(this.countries);
                 })
                 .catch(error => {
                     console.error(error);
@@ -337,6 +339,10 @@ export default {
     justify-content: space-between;
 }
 
+#marquee {
+    border-radius: 10px;
+}
+
 .imges>img {
     width: 60px;
     height: 60px;
@@ -348,5 +354,10 @@ export default {
 .btn-outline-success,
 .btn-outline-danger {
     margin: 10px;
+}
+
+.err {
+    display: flex;
+    flex-direction: column;
 }
 </style>

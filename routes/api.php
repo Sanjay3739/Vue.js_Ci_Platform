@@ -40,4 +40,4 @@ Route::resource('user', UserController::class);
 Route::resource('banner', BannerController::class);
 
 
-// Route::resource('city', CityController::class);
+Route::get('countries', [CountryController::class, 'fetch']);
