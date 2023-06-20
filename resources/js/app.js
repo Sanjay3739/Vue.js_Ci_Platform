@@ -11,6 +11,11 @@ import index from './components/cmspage/index.vue';
 import create from './components/cmspage/create.vue';
 import show from './components/cmspage/show.vue';
 import edit from './components/cmspage/edit.vue';
+// mission page
+import missionindex from './components/mission/index.vue';
+import missioncreate from './components/mission/create.vue';
+import missionshow from './components/mission/show.vue';
+import missionedit from './components/mission/edit.vue';
 //mission skill
 import missionskillindex from './components/missionskill/index.vue';
 import missionskillcreate from './components/missionskill/create.vue';
@@ -42,6 +47,7 @@ const router = createRouter({
 
         //sidebar path
         { path: '/sidebar', component: sidebar },
+
         { path: '/', redirect: '/user' }, // Redirect root path to '/cmspage'
 
         // cms page path
@@ -49,6 +55,12 @@ const router = createRouter({
         { path: '/cmspages/create', component: create },
         { path: '/cmspages/:cms_page_id', component: show },
         { path: '/cmspages/:cms_page_id/edit', component: edit },
+
+        // Mission page path
+        { path: '/mission', component: missionindex },
+        { path: '/mission/create', component: missioncreate },
+        { path: '/mission/:mission_id', component: missionshow },
+        { path: '/mission/:mission_id/edit', component: missionedit },
 
         // mission skill page path
         { path: '/missionskill', component: missionskillindex },

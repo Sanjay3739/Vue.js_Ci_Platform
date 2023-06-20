@@ -1,4 +1,5 @@
 <template>
+    <Sidebar></Sidebar>
     <div class="container" id="container">
         <div class="row">
             <div class="col-lg-12">
@@ -138,6 +139,7 @@ export default {
 
         };
     },
+    components: { Sidebar },
     async created() {
         try {
             const response = await axios.get("/api/story");

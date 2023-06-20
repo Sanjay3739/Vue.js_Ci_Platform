@@ -1,11 +1,8 @@
 <template>
+    <Sidebar></Sidebar>
     <div class="container">
-
         <h3 class=" mt-4">Mission Application </h3>
-
-
         <div class="row">
-
             <div class="col-md-12 d-flex ">
                 <marquee class="breadcrumb mb-4 p-3 w-25 " id="marquee">
                     Mission-Application
@@ -131,6 +128,8 @@ export default {
 
 
     },
+    components: { Sidebar },
+    
     async created() {
         try {
             const response = await axios.get("/api/missionapplication");

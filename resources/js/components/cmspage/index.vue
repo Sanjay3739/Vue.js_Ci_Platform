@@ -1,4 +1,5 @@
 <template>
+    <Sidebar></Sidebar>
     <div class="container ">
         <h1 class=" h1 mt-4">CMS Page</h1>
         <marquee class="breadcrumb p-3   w-25 " id="marquee">
@@ -43,7 +44,7 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover table-bordered text-center ">
-                      <thead class="thead-light">
+                        <thead class="thead-light">
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
@@ -74,13 +75,13 @@
                                     <router-link :to="`/cmspages/${cmspage.cms_page_id}/edit`" class=""><img
                                             src="Images/edit.png" style="height: 22px; width: 22px;">
 
-                                        </router-link>
+                                    </router-link>
                                     <a @click="deletecmspage(cmspage.cms_page_id)" id="delete">
-                                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"
-                                                fill-rule="evenodd" clip-rule="evenodd">
-                                                <path
-                                                    d="M9 3h6v-1.75c0-.066-.026-.13-.073-.177-.047-.047-.111-.073-.177-.073h-5.5c-.066 0-.13.026-.177.073-.047.047-.073.111-.073.177v1.75zm11 1h-16v18c0 .552.448 1 1 1h14c.552 0 1-.448 1-1v-18zm-10 3.5c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm5 0c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm8-4.5v1h-2v18c0 1.105-.895 2-2 2h-14c-1.105 0-2-.895-2-2v-18h-2v-1h7v-2c0-.552.448-1 1-1h6c.552 0 1 .448 1 1v2h7z" />
-                                            </svg>
+                                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                                            clip-rule="evenodd">
+                                            <path
+                                                d="M9 3h6v-1.75c0-.066-.026-.13-.073-.177-.047-.047-.111-.073-.177-.073h-5.5c-.066 0-.13.026-.177.073-.047.047-.073.111-.073.177v1.75zm11 1h-16v18c0 .552.448 1 1 1h14c.552 0 1-.448 1-1v-18zm-10 3.5c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm5 0c0-.276-.224-.5-.5-.5s-.5.224-.5.5v12c0 .276.224.5.5.5s.5-.224.5-.5v-12zm8-4.5v1h-2v18c0 1.105-.895 2-2 2h-14c-1.105 0-2-.895-2-2v-18h-2v-1h7v-2c0-.552.448-1 1-1h6c.552 0 1 .448 1 1v2h7z" />
+                                        </svg>
                                     </a>
                                 </td>
                             </tr>
@@ -100,10 +101,15 @@ import Sidebar from '../sidebar.vue';
 
 export default {
     data() {
+
         return {
             cmspages: [],
             searchQuery: '',
         };
+
+    },
+    components: {
+        Sidebar
     },
     async created() {
         try {
@@ -146,7 +152,8 @@ export default {
     color: red;
 }
 
-tr,td {
+tr,
+td {
     padding: 13px !important;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -170,6 +177,4 @@ tr,td {
     background: linear-gradient(to left, #069ce6, #d00288, #f79809);
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
 }
-
-
 </style>
