@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // CountrySeeder::class,
-            CitySeeder::class,
+            // CitySeeder::class,
             // SkillSeeder::class,
             // StoryInviteSeeder::class,
             // StorySeeder::class,
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             // MissionSkillSeeder::class,
             // MissionMediaSeeder::class,
             // MissionSeeder::class,
-            // UserSeeder::class,
+            UserSeeder::class,
             // MissionSeeder::class,
             // GoalMissionSeeder::class,
             // CommentSeeder::class,

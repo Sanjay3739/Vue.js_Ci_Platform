@@ -72,11 +72,6 @@ class BannerController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
     }
-
-
-
-
-
     public function destroy($id)
     {
         $banner = Banner::find($id);

@@ -59,21 +59,22 @@
                                 <table class="table table-hover table-bordered text-center ">
                                     <thead class="thead-light">
                                         <tr>
+                                            <th>#</th>
                                             <th>Title</th>
                                             <th>Sort Order </th>
                                             <th>Action </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <tr v-for="banner in banners" :key="banner.banner_id">
-                                            <td class="">
+                                            <td> <img :src="getUserImageUrl(banner.image)" alt="banner"
+                                                    style="border-radius:50%;width: 65px;height: 65px;"></td>
+                                            <td>
                                                 <div>{{ banner.text }}</div>
                                             </td>
-                                            <td class="">
+                                            <td>
                                                 <div>{{ banner.sort_order }}</div>
                                             </td>
-
                                             <td
                                                 style="display: flex; flex-direction: row; padding: 10px; justify-content: space-between;">
                                                 <router-link :to="`/banner/${banner.banner_id}`" class=""><svg width="26"
@@ -117,7 +118,6 @@ export default {
     data() {
         return {
             banners: [],
-
         };
     },
     async created() {
@@ -130,6 +130,11 @@ export default {
         }
     },
     methods: {
+        getUserImageUrl(image) {
+            const baseUrl = '/storage/uploads/'; // Modify the base URL according to your storage configuration
+            return `${baseUrl}${image}`;
+        },
+
         async deletebanner(id) {
             try {
                 await axios.delete(`/api/banner/${id}`);
@@ -179,4 +184,5 @@ td {
     width: 50px;
     height: 50px;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-}</style>
+}
+</style>

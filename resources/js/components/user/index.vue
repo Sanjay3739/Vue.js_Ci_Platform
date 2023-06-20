@@ -57,6 +57,7 @@
                             <table class="table  table-hover  text-center  ">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th> # </th>
                                         <th>First Name </th>
                                         <th>Last Name</th>
                                         <th> Email</th>
@@ -68,6 +69,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="user in users" :key="user.user_id">
+                                        <td> <img :src="getUserImageUrl(user.avatar)" alt="Volunteer Image" style="border-radius:50%;width: 65px;height: 65px;"></td>
                                         <td>{{ user.first_name }}</td>
                                         <td>{{ user.last_name }}</td>
                                         <td>{{ user.email }}</td>
@@ -138,6 +140,9 @@ export default {
         }
     },
     methods: {
+        getUserImageUrl(avatar) {
+            return `/${avatar}`;
+        },
 
         getStatusLabel(status) {
             return status == 1 ? "Active" : "Inactive";
@@ -162,6 +167,7 @@ export default {
 }
 
 #marquee {
+    border-radius: 10px;
     background: linear-gradient(to left, #069ce6, #d00288, #f79809);
     color: #000000;
     box-shadow: 5px 5px 5px rgba(62, 60, 60, 0.6);
@@ -205,5 +211,4 @@ tr {
     display: flex;
     justify-content: space-between;
 }
-
 </style>
